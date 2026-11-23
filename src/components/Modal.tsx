@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 
 export function Modal({
   title,
@@ -11,6 +11,13 @@ export function Modal({
   onClose?: () => void
   actions?: ReactNode
 }) {
+  useEffect(() => {
+    if (!onClose) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
   return (
     <div className="overlay" onClick={onClose}>
       <section

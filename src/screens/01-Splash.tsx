@@ -1,18 +1,20 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { HomeBar, Logo } from '../components'
+import { Logo, Screen } from '../components'
 import { paths } from '../lib/routes'
+import { frozen } from '../lib/timing'
 
 export default function Splash() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (frozen()) return
     const t = setTimeout(() => navigate(paths.onboarding), 1900)
     return () => clearTimeout(t)
   }, [navigate])
 
   return (
-    <div className="screen splash">
+    <Screen className="splash">
       <div className="stars" aria-hidden="true">
         ·　　✦　　　　·
         <br />
@@ -24,7 +26,6 @@ export default function Splash() {
         <i />
       </div>
       <small>SHUFFLING THE DECK...</small>
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

@@ -1,14 +1,20 @@
-import { useNavigate } from 'react-router'
-import { Avatar, Button, HomeBar, RoomCode } from '../components'
+import { Avatar, Button, RoomCode, Screen } from '../components'
 import { mockPlayers } from '../data/dev-fixtures/players' // DEV FIXTURE
+import { useBack } from '../lib/nav'
 
 /** Dev-only preview route until Phase 1 turns 25-27 into overlays. */
 export default function HostTransfer() {
-  const navigate = useNavigate()
-  const done = () => navigate(-1)
+  const back = useBack()
   return (
-    <div className="screen host-transfer">
-      <div className="host-banner">✓ Ama is now the host</div>
+    <Screen
+      className="host-transfer"
+      head={<div className="host-banner">✓ Ama is now the host</div>}
+      foot={
+        <Button cta onClick={back}>
+          START GAME
+        </Button>
+      }
+    >
       <h2>LOBBY</h2>
       <RoomCode code="KFZ7" />
       <div className="players">
@@ -20,12 +26,10 @@ export default function HostTransfer() {
         <Avatar player={{ ...mockPlayers[1], isHost: true }} />
         <h2>Ama is the new host</h2>
         <p className="muted">All set! You may have a new host, but your game goes on.</p>
-        <Button variant="mint" onClick={done}>
+        <Button variant="mint" onClick={back}>
           GOT IT!
         </Button>
       </div>
-      <Button onClick={done}>START GAME</Button>
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

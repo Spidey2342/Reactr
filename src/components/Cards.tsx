@@ -9,6 +9,7 @@ export function Scenario({ scenario, compact = false }: { scenario: ScenarioCard
   )
 }
 
+/** A reaction card. With `onClick` it is a button; without, it is plain content (not in the tab order). */
 export function Reaction({
   card,
   selected = false,
@@ -20,15 +21,23 @@ export function Reaction({
   onClick?: () => void
   mini?: boolean
 }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={onClick ? selected : undefined}
-      className={`reaction ${card.color} ${selected ? 'selected' : ''} ${mini ? 'mini' : ''}`}
-    >
-      <img src={card.imageUrl} alt={card.caption} />
+  const className = `reaction ${card.color} ${selected ? 'selected' : ''} ${mini ? 'mini' : ''} ${onClick ? 'tappable' : ''}`
+  const inner = (
+    <>
+      <img src={card.imageUrl} alt="" draggable={false} />
       <strong>{card.caption}</strong>
+    </>
+  )
+  if (!onClick) {
+    return (
+      <div className={className} role="img" aria-label={card.caption}>
+        {inner}
+      </div>
+    )
+  }
+  return (
+    <button type="button" onClick={onClick} aria-pressed={selected} aria-label={card.caption} className={className}>
+      {inner}
     </button>
   )
 }

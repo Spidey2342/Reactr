@@ -1,10 +1,6 @@
-.signup {
-  padding-top: 50px;
-}
-
 .auth-tabs {
   height: 57px;
-  margin: 32px 0 45px;
+  margin: 24px 0 28px;
   padding: 5px;
   border: 2px solid #35304e;
   border-radius: 15px;
@@ -20,7 +16,7 @@
   font-weight: 700;
 }
 
-.auth-tabs button:first-child {
+.auth-tabs button[aria-selected="true"] {
   background: var(--pink);
   color: white;
 }
@@ -30,9 +26,30 @@
   font-size: 28px;
 }
 
-.signup>p {
+.signup .auth-form>p.muted {
   font-size: 14px;
   line-height: 1.5;
+}
+
+.pw-wrap {
+  position: relative;
+}
+
+.pw-wrap .input {
+  padding-right: 52px;
+}
+
+.eye {
+  position: absolute;
+  right: 4px;
+  top: 6px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
 }
 
 .strength {
@@ -53,6 +70,7 @@
 }
 
 .terms {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -62,7 +80,19 @@
 }
 
 .terms input {
-  display: none;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.terms input:focus-visible+i {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
 }
 
 .terms i {
@@ -100,8 +130,13 @@
   font-size: 11px!important;
 }
 
-.login-hint b {
+.link {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
   color: var(--pink);
+  font-weight: 800;
+  font-size: inherit;
 }
 
 .profile-setup h1 {
@@ -122,12 +157,14 @@
   font-size: 48px;
 }
 
-.big-avatar i {
+.big-avatar .edit-badge {
   position: absolute;
   bottom: -4px;
   right: -3px;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid var(--bg);
   border-radius: 50%;
   background: var(--yellow);
   color: #100d24;
@@ -136,15 +173,24 @@
   place-items: center;
 }
 
+.big-avatar .face-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .upload {
   display: block;
   width: max-content;
+  min-height: 36px;
   margin: auto;
-  padding: 5px 12px;
-  border-radius: 12px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 14px;
   background: #211d3a;
   color: #b8b2c8;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .avatar-grid {

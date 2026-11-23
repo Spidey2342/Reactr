@@ -40,7 +40,11 @@ export default function RoomScreen() {
   const { room } = useGameState()
   const [scoreboard, setScoreboard] = useState(false)
   const [paused, setPaused] = useState(false)
-  const ui = useMemo(() => ({ openScoreboard: () => setScoreboard(true) }), [])
+  const overlayOpen = scoreboard || paused
+  const ui = useMemo(
+    () => ({ openScoreboard: () => setScoreboard(true), overlayOpen }),
+    [overlayOpen],
+  )
 
   // Not in this room (e.g. page refreshed with mock state). Phase 4 replaces this with a reconnect.
   if (!room || room.code !== code) return <Navigate to={paths.home} replace />
@@ -49,8 +53,11 @@ export default function RoomScreen() {
 
   return (
     <RoomUiContext.Provider value={ui}>
-      {screenFor[room.phase]()}
-      {scoreboard && <ScoreboardSheet players={room.players} close={() => setScoreboard(false)} />}
+      {/* Keyed by phase so each phase change plays the screen-in transition. */}
+      <div key={room.phase} className="screen-transition">
+        {screenFor[room.phase]()}
+      </div>
+      {scoreboard && <ScoreboardSheet room={room} close={() => setScoreboard(false)} />}
       {paused && (
         <PauseMenu
           host={isHost}

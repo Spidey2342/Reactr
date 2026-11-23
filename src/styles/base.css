@@ -9,21 +9,30 @@
   --text: #fff;
   --muted: #AAA3C2;
   --line: #34304D;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* The page itself never scrolls. Each screen scrolls its own middle region. */
 html,body,#root {
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
   background: #080612;
 }
 
+#root {
+  height: 100dvh;
+}
+
 body {
-  margin: 0;
   color: var(--text);
   font-family: Inter, sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button,input {
@@ -34,41 +43,86 @@ button {
   color: inherit;
 }
 
+/* ---- App shell ------------------------------------------------------------------------
+   .app is exactly one viewport tall, a flex column. Every screen inside it is
+   [fixed header] [scrolling body] [pinned footer] [tab bar]. Only .screen-body scrolls. */
 .app {
   position: relative;
-  width: 390px;
-  max-width: 100vw;
-  min-height: 100dvh;
-  margin: auto;
+  width: min(100vw, 430px);
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   overflow: hidden;
 }
 
-.screen {
+.screen-transition {
   position: relative;
-  min-height: 100dvh;
-  padding: 40px 24px 34px;
-  background: var(--bg);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.scroll {
-  height: 100dvh;
-  overflow: auto;
-  padding-bottom: 108px;
+.screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: clip;
+}
+
+.screen-head {
+  flex: none;
+  padding: calc(var(--safe-top) + 20px) 24px 0;
+}
+
+.screen-body {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding: 0 24px 20px;
+}
+
+.screen-body::-webkit-scrollbar {
+  display: none;
+}
+
+.screen-body.no-head {
+  padding-top: calc(var(--safe-top) + 34px);
+}
+
+.screen-foot {
+  position: relative;
+  z-index: 5;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 24px calc(var(--safe-bottom) + 26px);
+  background: linear-gradient(to top, var(--bg) 80%, transparent);
 }
 
 .display,h1,h2,h3,.btn,.logo {
   font-family: "Baloo 2", sans-serif;
 }
 
+/* Decorative home indicator from the designs. It never takes taps and footers leave room for it. */
 .home-bar {
   position: absolute;
-  bottom: 10px;
+  bottom: 9px;
   left: 50%;
   width: 127px;
   height: 5px;
   transform: translateX(-50%);
   background: #2e2a40;
   border-radius: 9px;
-  z-index: 20;
+  z-index: 100;
+  pointer-events: none;
 }

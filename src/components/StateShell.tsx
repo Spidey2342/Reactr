@@ -1,28 +1,29 @@
 import type { ReactNode } from 'react'
-import { HomeBar } from './HomeBar'
+import { Screen } from './Screen'
 
 export function StateShell({
   accent = 'pink',
   icon,
   title,
   text,
+  foot,
   children,
 }: {
   accent?: string
   icon: string
   title: string
   text: string
-  children: ReactNode
+  foot?: ReactNode
+  children?: ReactNode
 }) {
   return (
-    <div className={`screen system-state ${accent}`}>
+    <Screen className={`system-state ${accent}`} foot={foot}>
       <div className="state-icon" aria-hidden="true">
         {icon}
       </div>
       <h1>{title}</h1>
       <p>{text}</p>
       {children}
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

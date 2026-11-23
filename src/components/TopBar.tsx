@@ -1,17 +1,8 @@
 import { Icon } from './Icon'
 import { IconButton } from './Button'
+import { SoundButton } from './SoundButton'
 
-export function TopBar({
-  round = 1,
-  onScore,
-  onSound,
-  sound = true,
-}: {
-  round?: number
-  onScore?: () => void
-  onSound?: () => void
-  sound?: boolean
-}) {
+export function TopBar({ round = 1, onScore }: { round?: number; onScore?: () => void }) {
   return (
     <div className="topbar">
       <span className="round-pill">ROUND {round} OF 5</span>
@@ -19,13 +10,12 @@ export function TopBar({
         ♛<b>JUDGE</b>
       </span>
       <div>
-        <IconButton label="Scoreboard" onClick={onScore}>
-          <Icon name="chart" />
-        </IconButton>
-        <IconButton label={sound ? 'Mute sound' : 'Unmute sound'} onClick={onSound}>
-          <Icon name="sound" />
-          {!sound && <i className="slash" />}
-        </IconButton>
+        {onScore && (
+          <IconButton label="Scoreboard" onClick={onScore}>
+            <Icon name="chart" />
+          </IconButton>
+        )}
+        <SoundButton />
       </div>
     </div>
   )

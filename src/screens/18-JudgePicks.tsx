@@ -1,26 +1,31 @@
 import { useState } from 'react'
-import { Button, HomeBar, Modal, Reaction, RoomTopBar, Scenario } from '../components'
+import { Button, Modal, Reaction, RoomTopBar, Scenario, Screen } from '../components'
 import { reactionCards } from '../data/dev-fixtures/reactionCards' // DEV FIXTURE: becomes the real played cards
 import { scenarios } from '../data/dev-fixtures/scenarios' // DEV FIXTURE
+import { feedback } from '../lib/feedback'
 import { gameApi, useRequiredRoom } from '../state/gameStore'
+import type { ReactionCard } from '../types'
 
 export default function JudgePicks() {
   const room = useRequiredRoom()
-  const [chosen, setChosen] = useState<string | null>(null)
+  const [chosen, setChosen] = useState<{ playerId: string; card: ReactionCard } | null>(null)
   const cards = reactionCards.slice(0, 4)
+  const scenario = scenarios.find((x) => x.id === room.currentRound.scenarioId) ?? scenarios[0]
 
   return (
-    <div className="screen judge-picks">
-      <RoomTopBar />
+    <Screen className="judge-picks" head={<RoomTopBar />}>
       <h3>Judge's pick</h3>
-      <Scenario scenario={scenarios[0]} compact />
+      <Scenario scenario={scenario} compact />
       <div className="judge-grid">
         {cards.map((c, i) => (
           <Reaction
             key={c.id}
             mini
             card={c}
-            onClick={() => setChosen(room.players[(i + 1) % room.players.length].id)}
+            onClick={() => {
+              feedback.select()
+              setChosen({ playerId: room.players[(i + 1) % room.players.length].id, card: c })
+            }}
           />
         ))}
       </div>
@@ -28,13 +33,21 @@ export default function JudgePicks() {
         <Modal
           title="CROWN THIS ONE?"
           onClose={() => setChosen(null)}
-          actions={<Button onClick={() => gameApi.crown(chosen)}>CROWN THIS ONE 👑</Button>}
+          actions={
+            <Button
+              onClick={() => {
+                feedback.win()
+                gameApi.crown(chosen.playerId)
+              }}
+            >
+              CROWN THIS ONE 👑
+            </Button>
+          }
         >
           <p className="muted">This card gets the point!</p>
-          <Reaction card={cards[0]} />
+          <Reaction card={chosen.card} />
         </Modal>
       )}
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

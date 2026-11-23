@@ -1,0 +1,283 @@
+/* Motion, pressed/focus/loading states, toasts and the small widgets that need them.
+   Loaded last so it can refine anything above. Every animation stops under prefers-reduced-motion. */
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateX(22px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(.6);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: rotateY(-100deg) scale(.88);
+  }
+  55% {
+    opacity: 1;
+  }
+}
+
+@keyframes float-up {
+  from {
+    opacity: 0;
+    transform: translateY(0) scale(.6);
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-230px) scale(1.35) rotate(14deg);
+  }
+}
+
+@keyframes slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
+
+@keyframes slide-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+}
+
+.screen-transition {
+  animation: screen-in .24s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+
+.ob-slide.next {
+  animation: slide-next .3s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+
+.ob-slide.prev {
+  animation: slide-prev .3s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+
+.auth-form {
+  animation: fade-in .2s ease-out;
+}
+
+.flip {
+  flex: none;
+  animation: flip-in .5s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+
+.floaters {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floaters span {
+  position: absolute;
+  bottom: 8%;
+  font-size: 34px;
+  animation: float-up 1.2s ease-out forwards;
+}
+
+/* Pressed, focus and disabled states for everything tappable. */
+button {
+  cursor: pointer;
+  transition: transform .12s, background-color .15s, border-color .15s, opacity .15s, box-shadow .15s;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:not(:disabled):active {
+  transform: scale(.96);
+}
+
+.btn:not(:disabled):active {
+  transform: translateY(3px) scale(.98);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .25);
+}
+
+.reaction.tappable:not(:disabled):active {
+  transform: translateY(-2px) scale(.96);
+}
+
+.reaction.selected:not(:active) {
+  transform: translateY(-8px);
+}
+
+.icon-btn:not(:disabled):active,
+.tabs button:not(:disabled):active {
+  background-color: #241f46;
+}
+
+button:focus-visible,
+[role="tab"]:focus-visible,
+[role="switch"]:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.icon-btn .slash {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  top: 50%;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--red);
+  transform: rotate(-45deg);
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  vertical-align: -3px;
+  border: 3px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+.spinner.small {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  border-width: 2px;
+}
+
+.toasts {
+  position: absolute;
+  z-index: 120;
+  top: calc(var(--safe-top) + 12px);
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 12px 16px;
+  border: 1px solid #3b3558;
+  border-radius: 14px;
+  background: #221d3f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 8px 24px #0008;
+  animation: toast-in .22s ease-out;
+}
+
+.toast.error {
+  border-color: var(--red);
+  background: #3c1728;
+}
+
+.timer-mini {
+  position: relative;
+  flex: none;
+  width: 56px;
+  height: 56px;
+}
+
+.timer-mini svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-mini .track,
+.timer-mini .arc {
+  fill: none;
+  stroke-width: 6;
+}
+
+.timer-mini .track {
+  stroke: #2c2745;
+}
+
+.timer-mini .arc {
+  stroke: var(--mint);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear, stroke .3s;
+}
+
+.timer-mini.urgent .arc {
+  stroke: var(--red);
+}
+
+.timer-mini b {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 800 18px "Baloo 2";
+}
+
+.timer-mini.urgent b {
+  color: var(--red);
+  animation: pulse .5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* Tailwind's preflight makes every svg display:block; icons inside buttons sit in the text line. */
+.btn svg {
+  display: inline-block;
+  vertical-align: -3px;
+}

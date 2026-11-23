@@ -1,9 +1,12 @@
 .splash {
+  text-align: center;
+}
+
+.splash .screen-body {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
 }
 
 .splash .stars {
@@ -41,7 +44,7 @@
   animation: load 1.8s linear forwards;
 }
 
-.splash>small {
+.splash small {
   position: absolute;
   bottom: 59px;
   font-size: 8px;
@@ -57,21 +60,30 @@
 
 .onboarding {
   text-align: center;
-  padding-top: 55px;
+}
+
+.ob-head {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .skip {
-  position: absolute;
-  right: 25px;
-  top: 42px;
+  min-width: 56px;
+  min-height: 44px;
   border: 0;
   background: none;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ob-swipe {
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .ob-art {
-  height: 370px;
+  height: clamp(190px, 38dvh, 370px);
   display: grid;
   place-items: center;
   position: relative;

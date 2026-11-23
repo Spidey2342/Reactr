@@ -12,6 +12,13 @@ export function Chip({
   active?: boolean
   onClick?: () => void
 }) {
+  if (!onClick) {
+    return (
+      <span className={`chip ${color} ${active ? 'active' : ''}`}>
+        {active && <Icon name="check" size={14} />} {children}
+      </span>
+    )
+  }
   return (
     <button type="button" onClick={onClick} className={`chip ${color} ${active ? 'active' : ''}`}>
       {active && <Icon name="check" size={14} />} {children}

@@ -19,8 +19,18 @@ export const randomCode = () =>
   Array.from({ length: 4 }, () => String.fromCharCode(65 + Math.floor(Math.random() * 26))).join('')
 
 /** `asHostId` is who hosts the room; the device owner (ME_ID) is a normal player when it differs. */
-export function makeRoom(settings = defaultSettings, code = randomCode(), asHostId: string = ME_ID): Room {
-  const players = mockPlayers.slice(0, 4).map((p) => ({ ...p, score: 0, isHost: p.id === asHostId }))
+export function makeRoom(
+  settings = defaultSettings,
+  code = randomCode(),
+  asHostId: string = ME_ID,
+  me?: { name: string; avatar: string },
+): Room {
+  const players = mockPlayers.slice(0, 4).map((p) => ({
+    ...p,
+    ...(p.id === ME_ID && me ? { name: me.name, avatar: me.avatar } : {}),
+    score: 0,
+    isHost: p.id === asHostId,
+  }))
   const round: Round = { number: 1, scenarioId: scenarios[0].id, judgeId: 'ama', plays: [] }
   return { code, settings, players, deck: reactionCards, currentRound: round, phase: 'lobby' }
 }

@@ -1,4 +1,5 @@
 .btn {
+  display: block;
   width: 100%;
   height: 56px;
   border: 0;
@@ -11,13 +12,19 @@
   transition: .12s;
 }
 
-.btn:active {
-  transform: scale(.98);
-}
-
 .btn:disabled {
   opacity: .35;
   cursor: default;
+}
+
+.btn.loading:disabled {
+  opacity: .85;
+  cursor: progress;
+}
+
+.btn.compact {
+  height: 46px;
+  font-size: 15px;
 }
 
 .btn.primary {
@@ -58,7 +65,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
 .back-title h2 {

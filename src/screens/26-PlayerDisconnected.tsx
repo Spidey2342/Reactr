@@ -1,15 +1,26 @@
-import { useNavigate } from 'react-router'
-import { Avatar, Button, HomeBar, Scenario, TopBar } from '../components'
+import { Avatar, Button, Scenario, Screen, TopBar } from '../components'
 import { mockPlayers } from '../data/dev-fixtures/players' // DEV FIXTURE
 import { scenarios } from '../data/dev-fixtures/scenarios' // DEV FIXTURE
+import { useBack } from '../lib/nav'
 
 /** Dev-only preview route until Phase 1 turns 25-27 into overlays. */
 export default function PlayerDisconnected() {
-  const navigate = useNavigate()
+  const back = useBack()
   return (
-    <div className="screen disconnected">
-      <div className="disconnect-banner">⚠ Yaw lost connection</div>
-      <TopBar />
+    <Screen
+      className="disconnected"
+      head={
+        <>
+          <div className="disconnect-banner">⚠ Yaw lost connection</div>
+          <TopBar />
+        </>
+      }
+      foot={
+        <Button cta onClick={back}>
+          CONTINUE
+        </Button>
+      }
+    >
       <Scenario scenario={scenarios[2]} compact />
       <h3>First one at a funny moment.</h3>
       <div className="players">
@@ -21,8 +32,6 @@ export default function PlayerDisconnected() {
         ↻<b>Yaw's card returned to the deck</b>
         <span>ENDS IN 00:14</span>
       </div>
-      <Button onClick={() => navigate(-1)}>CONTINUE</Button>
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

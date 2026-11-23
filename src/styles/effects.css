@@ -1,26 +1,9 @@
-.overlay-page:before,.glow-page:before,.glow-page:after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: .25;
-  pointer-events: none;
-}
-
-.glow-page:before {
-  width: 180px;
-  height: 180px;
-  background: var(--pink);
-  left: -100px;
-  top: 240px;
-}
-
-.glow-page:after {
-  width: 160px;
-  height: 160px;
-  background: var(--yellow);
-  right: -100px;
-  bottom: 120px;
+/* Soft colour wash behind a screen. Painted as backgrounds so nothing sticks out and widens the page. */
+.glow-page {
+  background:
+    radial-gradient(circle 150px at 0 300px, color-mix(in srgb, var(--pink) 28%, transparent), transparent),
+    radial-gradient(circle 140px at 100% calc(100% - 180px), color-mix(in srgb, var(--yellow) 28%, transparent), transparent),
+    var(--bg);
 }
 
 .confetti {
@@ -31,14 +14,14 @@
 }
 
 .confetti i {
-  --x: calc((var(--i) * 47px) % 380px);
+  --x: calc(var(--i) * 4.5%);
   position: absolute;
   width: 7px;
   height: 12px;
   left: var(--x);
   top: -20px;
   background: var(--pink);
-  animation: fall 2.6s calc(var(--i)*-.08s) infinite linear;
+  animation: fall 2.6s calc(var(--i)*-.08s) 2 linear forwards;
 }
 
 .confetti i:nth-child(3n) {
@@ -51,7 +34,7 @@
 
 @keyframes fall {
   to {
-    transform: translateY(850px) rotate(600deg);
+    transform: translateY(110dvh) rotate(600deg);
   }
 }
 
@@ -62,10 +45,7 @@
 }
 
 @media(max-width:389px) {
-  .app {
-    width: 100vw;
-  }
-  .screen {
+  .screen-head,.screen-body,.screen-foot {
     padding-left: 20px;
     padding-right: 20px;
   }

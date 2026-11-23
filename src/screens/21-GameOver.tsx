@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Button, Chip, Confetti, HomeBar, Icon, Modal, Reaction } from '../components'
+import { Button, Chip, Confetti, CountUp, Icon, Modal, Reaction, Screen, toast } from '../components'
 import { reactionCards } from '../data/dev-fixtures/reactionCards' // DEV FIXTURE
+import { feedback } from '../lib/feedback'
 import { paths } from '../lib/routes'
 import { gameApi } from '../state/gameStore'
 
 export default function GameOver() {
   const navigate = useNavigate()
   const [share, setShare] = useState(false)
+
+  useEffect(() => feedback.win(), [])
 
   const playAgain = () => {
     const room = gameApi.playAgain()
@@ -17,23 +20,42 @@ export default function GameOver() {
     gameApi.leaveRoom()
     navigate(paths.home)
   }
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.origin)
+      toast('Link copied')
+    } catch {
+      toast("Couldn't copy automatically. Copy the address from your browser instead.", 'error')
+    }
+    setShare(false)
+  }
 
   return (
-    <div className="screen scroll gameover">
+    <Screen
+      className="gameover"
+      foot={
+        <Button cta onClick={playAgain}>
+          PLAY AGAIN
+        </Button>
+      }
+    >
       <Confetti />
       <h4>GAME OVER</h4>
       <span className="round-pill">FIRST TO 5</span>
       <div className="champ">
         ♛<span>🤩</span>
         <b>Ama</b>
-        <em>5 pts</em>
+        <em>
+          <CountUp value={5} /> pts
+        </em>
       </div>
       <div className="podium">
         <div>
           <span>😎</span>
           <b>
             Kofi
-            <br />4 pts
+            <br />
+            <CountUp value={4} /> pts
           </b>
           <i>2</i>
         </div>
@@ -41,7 +63,8 @@ export default function GameOver() {
           <span>🤩</span>
           <b>
             Ama
-            <br />5 pts
+            <br />
+            <CountUp value={5} /> pts
           </b>
           <i>1</i>
         </div>
@@ -49,7 +72,8 @@ export default function GameOver() {
           <span>🥳</span>
           <b>
             Yaw
-            <br />3 pts
+            <br />
+            <CountUp value={3} /> pts
           </b>
           <i>3</i>
         </div>
@@ -67,7 +91,6 @@ export default function GameOver() {
         <Chip color="mint">🏆 FIRST WIN</Chip>
         <Chip color="yellow">♥ CROWD FAVOURITE</Chip>
       </div>
-      <Button onClick={playAgain}>PLAY AGAIN</Button>
       <Button variant="secondary" onClick={() => setShare(true)}>
         <Icon name="share" />　SHARE RESULT
       </Button>
@@ -77,10 +100,9 @@ export default function GameOver() {
       {share && (
         <Modal title="Share your result" onClose={() => setShare(false)}>
           <p className="muted">Your winner card is ready to share.</p>
-          <Button onClick={() => setShare(false)}>COPY LINK</Button>
+          <Button onClick={copyLink}>COPY LINK</Button>
         </Modal>
       )}
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }
