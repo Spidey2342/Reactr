@@ -1,0 +1,10 @@
+{
+  "description": "Play a lively party card game with friends, featuring humorous Ghanaian scenarios, quick rounds, and a simulated solo mode against AI players.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
