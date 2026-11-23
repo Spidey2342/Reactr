@@ -1,0 +1,115 @@
+.system-state {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.state-icon {
+  width: 170px;
+  height: 170px;
+  border: 3px solid var(--pink);
+  border-radius: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 65px;
+  box-shadow: 0 0 30px #ff3d8b22;
+}
+
+.system-state h1 {
+  font-size: 29px;
+}
+
+.system-state>p {
+  max-width: 270px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.system-state>.btn {
+  margin-top: 25px;
+}
+
+.system-state>small {
+  position: absolute;
+  bottom: 43px;
+  color: var(--mint);
+  font-size: 7px;
+}
+
+.signal {
+  font-size: 8px;
+  color: var(--pink);
+  letter-spacing: 1px;
+}
+
+.signal i {
+  display: block;
+  width: 190px;
+  height: 4px;
+  margin: 12px;
+  background: #332c45;
+  border-radius: 4px;
+}
+
+.disconnect-banner,.host-banner {
+  height: 37px;
+  margin: -20px 0 14px;
+  border: 1px solid var(--red);
+  border-radius: 9px;
+  background: #3c1728;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+
+.host-banner {
+  border-color: var(--mint);
+  background: #12342d;
+  color: var(--mint);
+}
+
+.disconnected h3 {
+  font-size: 13px;
+}
+
+.rejoin-card {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #2e2945;
+  border-radius: 15px;
+  background: var(--surface);
+}
+
+.rejoin-card b,.rejoin-card span {
+  display: block;
+  font-size: 10px;
+}
+
+.rejoin-card span {
+  color: var(--yellow);
+  margin-top: 10px;
+}
+
+.host-transfer {
+  text-align: center;
+}
+
+.host-transfer .players {
+  margin-bottom: 20px;
+}
+
+.new-host {
+  padding: 18px;
+  border: 2px solid var(--mint);
+  border-radius: 20px;
+  background: var(--surface);
+  margin-bottom: 18px;
+}
+
+.new-host p {
+  font-size: 10px;
+}

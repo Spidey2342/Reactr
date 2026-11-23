@@ -1,0 +1,322 @@
+.countdown {
+  text-align: center;
+}
+
+.ready {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.timer-ring {
+  width: 184px;
+  height: 184px;
+  margin: 190px auto 35px;
+  border: 11px solid #3b3153;
+  border-top-color: var(--yellow);
+  border-right-color: var(--yellow);
+  border-bottom-color: var(--pink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 0 10px #ff3d8b55);
+  animation: pulse .85s infinite;
+}
+
+.timer-ring b {
+  font: 800 88px "Baloo 2";
+}
+
+.countdown h2 {
+  margin-bottom: 0;
+}
+
+.countdown p {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.count-hand {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 30px;
+  height: 85px;
+  display: flex;
+}
+
+.count-hand .reaction {
+  width: 52px;
+  height: 70px;
+  margin-left: -3px;
+}
+
+.count-hand .reaction img {
+  height: 44px;
+}
+
+.count-hand .reaction strong {
+  display: none;
+}
+
+.round-intro {
+  text-align: center;
+  padding-top: 65px;
+}
+
+.round-intro>.round-pill {
+  display: inline-grid;
+}
+
+.judge-banner {
+  width: max-content;
+  margin: 50px auto 18px;
+  padding: 9px 18px;
+  border-radius: 18px;
+  background: var(--mint);
+  color: #071511;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.round-intro .scenario {
+  min-height: 200px;
+  font-size: 22px;
+  text-align: left;
+}
+
+.big-mark {
+  width: 80px;
+  height: 80px;
+  margin: 42px auto 15px;
+  border-radius: 16px;
+  background: var(--pink);
+  font: 800 62px "Baloo 2";
+  box-shadow: 8px 8px 0 var(--yellow);
+}
+
+.round-intro p {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.pick {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pick .topbar {
+  margin-bottom: 15px;
+}
+
+.pick-main {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.lock-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.swap {
+  display: block;
+  margin: 0 auto -6px;
+  position: relative;
+  z-index: 2;
+  padding: 5px 15px;
+  border: 1px solid #4e4863;
+  border-radius: 13px;
+  background: #17132c;
+  font-size: 9px;
+}
+
+.hand {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 0 28px;
+  scrollbar-width: none;
+}
+
+.pick>.btn {
+  margin-top: 14px;
+}
+
+.waiting {
+  text-align: center;
+}
+
+.waiting .scenario {
+  text-align: left;
+}
+
+.card-back {
+  width: 151px;
+  height: 214px;
+  margin: 33px auto 18px;
+  border: 7px solid var(--yellow);
+  border-radius: 28px;
+  background: var(--pink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 0 #080612;
+}
+
+.card-back b {
+  width: 65px;
+  height: 65px;
+  background: var(--yellow);
+  color: #0d0a1e;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  font: 800 38px "Baloo 2";
+}
+
+.card-back span {
+  margin-top: 29px;
+  padding: 6px 12px;
+  background: var(--mint);
+  color: #061711;
+  border-radius: 13px;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.mini-players {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.all-good {
+  margin: 24px auto;
+  padding: 11px;
+  border-radius: 8px;
+  background: var(--mint);
+  color: #061711;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.waiting>p {
+  font-size: 11px;
+}
+
+.reveal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal-head h1 {
+  font-size: 25px;
+}
+
+.reveal-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+
+.reveal-card>button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #34304d;
+  border-radius: 50%;
+  background: #151129;
+  font-size: 35px;
+}
+
+.reveal-card .reaction {
+  width: 229px;
+  height: 377px;
+}
+
+.reveal-card .reaction img {
+  height: 283px;
+}
+
+.reveal-card .reaction strong {
+  font-size: 29px;
+}
+
+.swipe {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.reveal .dots {
+  margin: 15px;
+}
+
+.reactions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px;
+}
+
+.reactions button {
+  height: 49px;
+  min-width: 81px;
+  border: 1px solid #302b48;
+  border-radius: 13px;
+  background: var(--surface);
+}
+
+.reactions b {
+  color: var(--mint);
+}
+
+.reveal>.btn {
+  margin-top: 10px;
+}
+
+.judge-name {
+  display: block;
+  text-align: center;
+  margin: 16px;
+  color: #6e687f;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.judge-picks h3 {
+  text-align: center;
+}
+
+.judge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  justify-items: center;
+  margin: 25px;
+}
+
+.judge-grid .reaction {
+  width: 134px;
+  height: 175px;
+}
+
+.judge-grid .reaction img {
+  height: 120px;
+}
+
+.judge-picks .modal .reaction {
+  margin: 15px auto;
+  width: 145px;
+  height: 185px;
+}

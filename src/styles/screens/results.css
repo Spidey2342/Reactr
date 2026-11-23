@@ -1,0 +1,225 @@
+.result {
+  text-align: center;
+  padding-top: 45px;
+}
+
+.result>h1 {
+  font-size: 29px;
+  line-height: 1;
+  margin: 25px;
+}
+
+.result>.reaction {
+  margin: 16px auto;
+}
+
+.point {
+  display: inline-block;
+  padding: 7px 15px;
+  border-radius: 14px;
+  background: var(--mint);
+  color: #07120f;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.result h4 {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+.round-cards {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px;
+}
+
+.round-cards .reaction {
+  width: 67px;
+  height: 87px;
+}
+
+.result>.btn {
+  margin: 12px 0;
+}
+
+.score-list {
+  margin: 20px 0;
+}
+
+.score-list div {
+  height: 58px;
+  border-bottom: 1px solid #302b48;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-list div>b {
+  color: var(--yellow);
+}
+
+.score-list span {
+  font-size: 25px;
+}
+
+.score-list strong {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.score-list em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+.gameover {
+  text-align: center;
+  padding-top: 48px;
+}
+
+.gameover>h4 {
+  color: var(--muted);
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.champ {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.champ>span {
+  width: 92px;
+  height: 92px;
+  border: 4px solid var(--pink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+}
+
+.champ>b,.champ>em {
+  font-style: normal;
+  font-weight: 800;
+}
+
+.champ em {
+  color: var(--yellow);
+}
+
+.podium {
+  height: 188px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.podium div {
+  width: 105px;
+}
+
+.podium span {
+  display: block;
+  font-size: 32px;
+}
+
+.podium b {
+  font-size: 11px;
+}
+
+.podium i {
+  height: 80px;
+  margin-top: 9px;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  color: #0b0816;
+  font: 800 28px "Baloo 2";
+  font-style: normal;
+}
+
+.podium div:nth-child(2) i {
+  height: 127px;
+  background: var(--pink);
+}
+
+.podium div:nth-child(3) i {
+  height: 67px;
+  background: var(--mint);
+}
+
+.funniest {
+  display: flex;
+  gap: 14px;
+  text-align: left;
+  margin: 30px 0;
+  padding: 16px;
+  border: 1px solid #2d2845;
+  border-radius: 22px;
+  background: var(--surface);
+}
+
+.funniest .reaction {
+  width: 110px;
+  height: 150px;
+}
+
+.funniest .reaction img {
+  height: 102px;
+}
+
+.funniest small {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.funniest h2 {
+  font-size: 19px;
+  line-height: 1;
+  margin: 8px 0;
+}
+
+.funniest p {
+  font-size: 11px;
+}
+
+.funniest>div>b {
+  color: var(--mint);
+  font-size: 10px;
+}
+
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.gameover>.btn {
+  margin: 12px 0;
+}
+
+.gameover>.btn.secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-home {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 12px;
+}

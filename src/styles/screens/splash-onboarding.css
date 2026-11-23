@@ -1,0 +1,149 @@
+.splash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.splash .stars {
+  position: absolute;
+  inset: 42px 30px;
+  color: var(--pink);
+  line-height: 140px;
+}
+
+.splash .logo {
+  margin-top: 40px;
+}
+
+.splash p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.loading {
+  position: absolute;
+  bottom: 88px;
+  left: 64px;
+  right: 64px;
+  height: 5px;
+  background: #211d36;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.loading i {
+  display: block;
+  width: 50%;
+  height: 100%;
+  background: var(--yellow);
+  animation: load 1.8s linear forwards;
+}
+
+.splash>small {
+  position: absolute;
+  bottom: 59px;
+  font-size: 8px;
+  color: #7e7891;
+  letter-spacing: 1px;
+}
+
+@keyframes load {
+  to {
+    width: 100%;
+  }
+}
+
+.onboarding {
+  text-align: center;
+  padding-top: 55px;
+}
+
+.skip {
+  position: absolute;
+  right: 25px;
+  top: 42px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.ob-art {
+  height: 370px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.onboarding h1 {
+  font-size: 24px;
+  margin: 5px;
+}
+
+.onboarding p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 285px;
+  margin: 0 auto 20px;
+}
+
+.onboarding .dots {
+  margin: 20px;
+}
+
+.ob-scenario {
+  width: 268px;
+  padding: 42px 20px;
+  border: 3px solid var(--pink);
+  border-radius: 22px;
+  background: var(--surface);
+  font-weight: 700;
+}
+
+.sticker {
+  position: absolute;
+  right: 35px;
+  top: 100px;
+  background: var(--mint);
+  color: #07120f;
+  border-radius: 12px;
+  padding: 5px 12px;
+  font-size: 9px;
+}
+
+.ob-cards {
+  display: flex;
+  align-items: center;
+}
+
+.ob-cards .reaction:first-child {
+  transform: rotate(-7deg) translateX(15px);
+}
+
+.ob-cards .reaction:nth-child(2) {
+  z-index: 2;
+  transform: scale(1.15);
+}
+
+.ob-cards .reaction:last-child {
+  transform: rotate(7deg) translateX(-15px);
+}
+
+.trophy {
+  font-size: 135px;
+  position: relative;
+}
+
+.trophy i {
+  position: absolute;
+  right: -20px;
+  bottom: 13px;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: var(--mint);
+  color: #07120f;
+  font: 800 10px Inter;
+}

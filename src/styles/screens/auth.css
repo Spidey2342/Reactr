@@ -1,0 +1,186 @@
+.signup {
+  padding-top: 50px;
+}
+
+.auth-tabs {
+  height: 57px;
+  margin: 32px 0 45px;
+  padding: 5px;
+  border: 2px solid #35304e;
+  border-radius: 15px;
+  display: flex;
+}
+
+.auth-tabs button {
+  width: 50%;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.auth-tabs button:first-child {
+  background: var(--pink);
+  color: white;
+}
+
+.signup h1 {
+  margin-bottom: 0;
+  font-size: 28px;
+}
+
+.signup>p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.strength {
+  display: flex;
+  gap: 5px;
+  margin: 7px 4px;
+}
+
+.strength i {
+  height: 6px;
+  flex: 1;
+  border-radius: 5px;
+  background: #40395b;
+}
+
+.strength i.on {
+  background: var(--mint);
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 24px 3px;
+}
+
+.terms input {
+  display: none;
+}
+
+.terms i {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: #3d3852;
+  display: grid;
+  place-items: center;
+}
+
+.terms input:checked+i {
+  background: var(--pink);
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--muted);
+  margin: 26px 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.or:before,.or:after {
+  content: "";
+  height: 1px;
+  background: #3a3550;
+  flex: 1;
+}
+
+.login-hint {
+  text-align: center;
+  font-size: 11px!important;
+}
+
+.login-hint b {
+  color: var(--pink);
+}
+
+.profile-setup h1 {
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+.big-avatar {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  margin: 25px auto 8px;
+  border: 3px solid var(--pink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  font-size: 48px;
+}
+
+.big-avatar i {
+  position: absolute;
+  bottom: -4px;
+  right: -3px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: #100d24;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+
+.upload {
+  display: block;
+  width: max-content;
+  margin: auto;
+  padding: 5px 12px;
+  border-radius: 12px;
+  background: #211d3a;
+  color: #b8b2c8;
+  font-size: 9px;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.avatar-grid button {
+  height: 54px;
+  border: 2px solid #292440;
+  border-radius: 12px;
+  background: #17142d;
+  font-size: 24px;
+}
+
+.avatar-grid button.active {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 2px #ff3d8b33;
+}
+
+.count-input {
+  position: relative;
+}
+
+.count-input span {
+  position: absolute;
+  right: 13px;
+  top: 20px;
+  font-size: 11px;
+  color: var(--mint);
+}
+
+.field>small {
+  display: block;
+  margin: 8px 4px;
+  font-size: 9px;
+}

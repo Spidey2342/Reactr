@@ -1,0 +1,72 @@
+.overlay-page:before,.glow-page:before,.glow-page:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: .25;
+  pointer-events: none;
+}
+
+.glow-page:before {
+  width: 180px;
+  height: 180px;
+  background: var(--pink);
+  left: -100px;
+  top: 240px;
+}
+
+.glow-page:after {
+  width: 160px;
+  height: 160px;
+  background: var(--yellow);
+  right: -100px;
+  bottom: 120px;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti i {
+  --x: calc((var(--i) * 47px) % 380px);
+  position: absolute;
+  width: 7px;
+  height: 12px;
+  left: var(--x);
+  top: -20px;
+  background: var(--pink);
+  animation: fall 2.6s calc(var(--i)*-.08s) infinite linear;
+}
+
+.confetti i:nth-child(3n) {
+  background: var(--yellow);
+}
+
+.confetti i:nth-child(3n+1) {
+  background: var(--mint);
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(850px) rotate(600deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@media(max-width:389px) {
+  .app {
+    width: 100vw;
+  }
+  .screen {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

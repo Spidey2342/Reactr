@@ -13,9 +13,14 @@ A Vite development server is **already running** on `$PORT` (default 8443). You 
 
 This is the canonical project structure. Start with task-relevant files below. Only follow imports or inspect other files when required, when a documented path is missing, or when the repository contradicts this guide.
 
-- `src/main.tsx` - React entrypoint; imports `src/index.css` and mounts `src/App.tsx` into the `#root` element
-- `src/App.tsx` - Primary application component and the usual starting point for UI work
-- `src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
+- `src/main.tsx` - React entrypoint; imports self-hosted fonts and `src/index.css`, mounts `src/App.tsx`
+- `src/App.tsx` - react-router routes only (no game logic). In-room screens are NOT routes: `/room/:code` renders them from `room.phase` in `src/screens/RoomScreen.tsx`
+- `src/screens/` - one file per design (`15b-PickACard.tsx` matches `.figma/screens/15b ...png`)
+- `src/components/` - shared UI pieces (barrel: `components/index.ts`)
+- `src/state/` - `gameStore.ts` (external store + `gameApi`, the ONLY thing screens call), `gameApi.ts` (interface), `mockEngine.ts` (fake rules, replaced by Supabase in Phase 2)
+- `src/data/dev-fixtures/` - fake players, cards, scenarios, packs. Temporary.
+- `src/lib/` - routes, identity helpers
+- `src/styles/` - CSS split by section; `src/index.css` imports them in cascade order (order matters)
 - `index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
 - `package.json` - Project dependencies and the Vite build, development, preview, and formatting scripts
 - `vite.config.ts` - Vite configuration with React, Tailwind CSS v4, and Figma Make plugins plus the `@` alias for `src`
