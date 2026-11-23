@@ -11,22 +11,43 @@
 }
 
 .timer-ring {
+  position: relative;
   width: 184px;
   height: 184px;
-  margin: 190px auto 35px;
-  border: 11px solid #3b3153;
-  border-top-color: var(--yellow);
-  border-right-color: var(--yellow);
-  border-bottom-color: var(--pink);
-  border-radius: 50%;
+  margin: clamp(30px, 11dvh, 140px) auto 28px;
   display: grid;
   place-items: center;
   filter: drop-shadow(0 0 10px #ff3d8b55);
   animation: pulse .85s infinite;
 }
 
+.timer-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: #3b3153;
+  stroke-width: 11;
+}
+
+.ring-arc {
+  fill: none;
+  stroke: url(#ring-grad);
+  stroke-width: 11;
+  stroke-linecap: round;
+  animation-name: ring-drain;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
 .timer-ring b {
   font: 800 88px "Baloo 2";
+  animation: pop .4s ease-out;
 }
 
 .countdown h2 {
@@ -42,9 +63,10 @@
   position: absolute;
   left: 18px;
   right: 18px;
-  bottom: 30px;
+  bottom: 34px;
   height: 85px;
   display: flex;
+  pointer-events: none;
 }
 
 .count-hand .reaction {
@@ -63,16 +85,16 @@
 
 .round-intro {
   text-align: center;
-  padding-top: 65px;
 }
 
-.round-intro>.round-pill {
+.round-intro .screen-body>.round-pill {
   display: inline-grid;
 }
 
 .judge-banner {
   width: max-content;
-  margin: 50px auto 18px;
+  max-width: 100%;
+  margin: clamp(20px, 6dvh, 50px) auto 18px;
   padding: 9px 18px;
   border-radius: 18px;
   background: var(--mint);
@@ -82,7 +104,7 @@
 }
 
 .round-intro .scenario {
-  min-height: 200px;
+  min-height: clamp(130px, 26dvh, 200px);
   font-size: 22px;
   text-align: left;
 }
@@ -90,7 +112,7 @@
 .big-mark {
   width: 80px;
   height: 80px;
-  margin: 42px auto 15px;
+  margin: clamp(20px, 6dvh, 42px) auto 15px;
   border-radius: 16px;
   background: var(--pink);
   font: 800 62px "Baloo 2";
@@ -102,19 +124,26 @@
   font-size: 11px;
 }
 
-.pick {
-  padding-left: 20px;
-  padding-right: 20px;
+.pick-scenario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.pick .topbar {
-  margin-bottom: 15px;
+.pick-scenario .scenario {
+  flex: 1;
+  min-width: 0;
 }
 
 .pick-main {
   display: flex;
   justify-content: center;
+  padding-top: 10px;
   margin: 6px 0;
+}
+
+.pick-main .reaction {
+  cursor: pointer;
 }
 
 .lock-hint {
@@ -126,26 +155,41 @@
 
 .swap {
   display: block;
-  margin: 0 auto -6px;
+  min-height: 38px;
+  margin: 0 auto;
   position: relative;
   z-index: 2;
-  padding: 5px 15px;
+  padding: 0 18px;
   border: 1px solid #4e4863;
-  border-radius: 13px;
+  border-radius: 14px;
   background: #17132c;
-  font-size: 9px;
+  font-size: 11px;
 }
 
+.swap:disabled {
+  opacity: .4;
+}
+
+/* The hand strip is the only thing allowed to scroll sideways. */
 .hand {
   display: flex;
   gap: 10px;
   overflow-x: auto;
-  padding: 12px 0 28px;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 20px;
+  margin: 0 -20px;
+  padding: 14px 20px 8px;
   scrollbar-width: none;
 }
 
-.pick>.btn {
-  margin-top: 14px;
+.hand::-webkit-scrollbar {
+  display: none;
+}
+
+.hand .reaction {
+  scroll-snap-align: center;
 }
 
 .waiting {
@@ -207,7 +251,7 @@
   font-weight: 800;
 }
 
-.waiting>p {
+.waiting .screen-body>p {
   font-size: 11px;
 }
 
@@ -222,28 +266,46 @@
 }
 
 .reveal-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 14px 0;
+  perspective: 900px;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .reveal-card>button {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  padding: 0 0 4px;
   border: 1px solid #34304d;
   border-radius: 50%;
   background: #151129;
-  font-size: 35px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.reveal-card>button:disabled {
+  opacity: .3;
 }
 
 .reveal-card .reaction {
-  width: 229px;
-  height: 377px;
+  height: clamp(250px, 38dvh, 377px);
+  width: auto;
+  aspect-ratio: 229 / 377;
 }
 
 .reveal-card .reaction img {
-  height: 283px;
+  height: auto;
+  flex: 4 1 0;
+  min-height: 0;
+}
+
+.reveal-card .reaction strong {
+  flex: 1 1 0;
 }
 
 .reveal-card .reaction strong {
@@ -252,7 +314,7 @@
 
 .swipe {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 16px;
   color: var(--muted);
   font-size: 10px;
   letter-spacing: 1px;
@@ -271,6 +333,7 @@
 
 .reactions button {
   height: 49px;
+  position: relative;
   min-width: 81px;
   border: 1px solid #302b48;
   border-radius: 13px;
@@ -279,10 +342,6 @@
 
 .reactions b {
   color: var(--mint);
-}
-
-.reveal>.btn {
-  margin-top: 10px;
 }
 
 .judge-name {
@@ -303,7 +362,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   justify-items: center;
-  margin: 25px;
+  margin: 20px 0;
 }
 
 .judge-grid .reaction {

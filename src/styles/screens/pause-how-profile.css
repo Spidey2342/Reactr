@@ -3,7 +3,10 @@
   inset: 0;
   z-index: 40;
   background: #080610f0;
-  padding: 80px 24px;
+  padding: clamp(24px, 10dvh, 80px) 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: fade-in .18s ease-out;
 }
 
 .pause-panel {
@@ -86,6 +89,23 @@
   margin: 0;
 }
 
+.how-step section {
+  text-align: left;
+}
+
+.how-steps.compact .how-step {
+  min-height: 92px;
+}
+
+.how-steps.compact .how-visual {
+  height: 66px;
+  font-size: 26px;
+}
+
+.how-steps.compact .how-step:after {
+  display: none;
+}
+
 .how-step p {
   font-size: 10px;
   line-height: 1.5;
@@ -108,19 +128,196 @@
   color: var(--muted);
 }
 
-.settings-list {
-  background: var(--surface);
+.stats.four {
+  grid-template-columns: 1fr 1fr;
+  margin: 22px 0 8px;
+}
+
+.stats.four div {
+  height: 84px;
+  padding: 0 18px;
+  border: 2px solid #2c2748;
   border-radius: 18px;
-  padding: 0 16px;
+  text-align: left;
+  place-content: center start;
+  gap: 4px;
+}
+
+.stats.four b {
+  font: 800 28px "Baloo 2";
+  line-height: 1;
+}
+
+.stats.four .mint b {
+  color: var(--mint);
+}
+
+.stats.four .yellow b {
+  color: var(--yellow);
+}
+
+.stats.four .pink b {
+  color: var(--pink);
+}
+
+.pill-btn {
+  min-height: 44px;
+  margin: 14px auto 0;
+  padding: 0 24px;
+  border: 2px solid #4a4466;
+  border-radius: 22px;
+  background: var(--surface);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.badge-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.badge-tile {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  border: 2px solid #34304d;
+  border-radius: 16px;
+  background: #17142e;
+  color: var(--yellow);
+  display: grid;
+  place-items: center;
+}
+
+.badge-tile.crowd {
+  color: var(--pink);
+}
+
+.badge-tile.streak {
+  color: var(--mint);
+}
+
+.badge-tile.locked {
+  color: #5a5470;
+  opacity: .7;
+}
+
+.badge-tile em {
+  position: absolute;
+  bottom: -7px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--yellow);
+  color: #14102b;
+  font: 800 8px Inter;
+  font-style: normal;
+}
+
+.badge-big {
+  width: 96px;
+  height: 96px;
+  margin: 8px auto 14px;
+  border-radius: 24px;
+  background: #17142e;
+  color: var(--yellow);
+  display: grid;
+  place-items: center;
+}
+
+.badge-big.locked {
+  color: #5a5470;
+}
+
+.settings-list {
+  border: 2px solid #2c2748;
+  border-radius: 22px;
+  background: var(--surface);
+  padding: 0 6px;
 }
 
 .settings-list label,.settings-list button {
-  height: 60px;
+  min-height: 62px;
   width: 100%;
+  padding: 0 12px;
   border: 0;
   border-bottom: 1px solid #312c48;
   background: none;
   display: flex;
   align-items: center;
+  gap: 14px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settings-list>:last-child {
+  border-bottom: 0;
+}
+
+.settings-list span {
+  flex: 1;
+}
+
+.settings-list .danger {
+  color: var(--red);
+}
+
+.row-icon {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 10px;
+  background: #100d24;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+}
+
+.row-icon.pink {
+  color: var(--pink);
+}
+
+.row-icon.yellow {
+  color: var(--yellow);
+}
+
+.row-icon.mint {
+  color: var(--mint);
+}
+
+.row-icon.red {
+  background: #3a1626;
+  color: var(--red);
+}
+
+.version {
+  margin: 22px 0 6px;
+  text-align: center;
+  color: #6e687f;
+  font: 700 11px Inter;
+  letter-spacing: 3px;
+}
+
+.sheet-list label {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  min-height: 56px;
+  border-bottom: 1px solid #302b48;
+  text-align: left;
+}
+
+.field.left,.muted.left {
+  text-align: left;
+}
+
+.qr-video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  background: #000;
+  object-fit: cover;
 }

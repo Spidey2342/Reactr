@@ -15,7 +15,11 @@ export function Toggle({
       aria-checked={on}
       aria-label={label}
       className={`toggle ${on ? 'on' : ''}`}
-      onClick={() => onChange(!on)}
+      onClick={(e) => {
+        // Rows wrap the switch in a <label>; stop the label from re-dispatching a second click on it.
+        e.stopPropagation()
+        onChange(!on)
+      }}
     >
       <i />
     </button>

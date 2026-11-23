@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { BackTitle, Button, Chip, HomeBar, IconButton, Stepper, Toggle } from '../components'
+import { BackTitle, Button, Chip, Icon, IconButton, Screen, SettingsSheet, Stepper, Toggle } from '../components'
 import { packs } from '../data/dev-fixtures/packs' // DEV FIXTURE
 import { paths } from '../lib/routes'
 import { gameApi, useGameState } from '../state/gameStore'
@@ -8,6 +9,7 @@ import type { RoomSettings } from '../types'
 export default function CreateRoom() {
   const navigate = useNavigate()
   const { draftSettings: settings } = useGameState()
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const patch = (p: Partial<RoomSettings>) => gameApi.setDraftSettings({ ...settings, ...p })
 
   const create = () => {
@@ -16,22 +18,37 @@ export default function CreateRoom() {
   }
 
   return (
-    <div className="screen scroll create">
-      <BackTitle
-        title="Create room"
-        onBack={() => navigate(paths.home)}
-        action={<IconButton label="Settings">⚙</IconButton>}
-      />
+    <Screen
+      className="create"
+      head={
+        <BackTitle
+          title="Create room"
+          onBack={() => navigate(paths.home)}
+          action={
+            <IconButton label="Settings" onClick={() => setSettingsOpen(true)}>
+              <Icon name="settings" />
+            </IconButton>
+          }
+        />
+      }
+      foot={
+        <Button cta onClick={create}>
+          🪄　Create room
+        </Button>
+      }
+    >
       <h3 className="setting-title">
         <i />
         Points to win
       </h3>
-      <div className="choice-grid">
+      <div className="choice-grid" role="radiogroup" aria-label="Points to win">
         {[3, 5, 7, 10].map((n) => (
           <button
             type="button"
+            role="radio"
             key={n}
             className={settings.pointsToWin === n ? 'active yellow' : ''}
+            aria-checked={settings.pointsToWin === n}
             onClick={() => patch({ pointsToWin: n })}
           >
             {n}
@@ -42,12 +59,14 @@ export default function CreateRoom() {
         <i />
         Pick timer
       </h3>
-      <div className="choice-grid two">
+      <div className="choice-grid two" role="radiogroup" aria-label="Pick timer">
         {[20, 30, 45, 0].map((n) => (
           <button
             type="button"
+            role="radio"
             key={n}
             className={settings.pickTimer === n ? 'active pink-bg' : ''}
+            aria-checked={settings.pickTimer === n}
             onClick={() => patch({ pickTimer: n })}
           >
             {n ? `${n} sec` : 'No timer'}
@@ -81,10 +100,12 @@ export default function CreateRoom() {
         ))}
       </div>
       <h3 className="section-title">Judge mode</h3>
-      <div className="judge-choices">
+      <div className="judge-choices" role="radiogroup" aria-label="Judge mode">
         <button
           type="button"
+          role="radio"
           className={settings.judgeMode === 'rotating' ? 'active' : ''}
+          aria-checked={settings.judgeMode === 'rotating'}
           onClick={() => patch({ judgeMode: 'rotating' })}
         >
           <b>⟳　Rotating</b>
@@ -92,7 +113,9 @@ export default function CreateRoom() {
         </button>
         <button
           type="button"
+          role="radio"
           className={settings.judgeMode === 'random' ? 'active' : ''}
+          aria-checked={settings.judgeMode === 'random'}
           onClick={() => patch({ judgeMode: 'random' })}
         >
           <b>🎲　Random</b>
@@ -106,8 +129,7 @@ export default function CreateRoom() {
         </div>
         <Toggle label="Allow mid-game join" on={settings.midGameJoin} onChange={(v) => patch({ midGameJoin: v })} />
       </div>
-      <Button onClick={create}>🪄　Create room</Button>
-      <HomeBar />
-    </div>
+      {settingsOpen && <SettingsSheet close={() => setSettingsOpen(false)} />}
+    </Screen>
   )
 }

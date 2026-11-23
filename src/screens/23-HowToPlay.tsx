@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router'
-import { BackTitle, Button, HomeBar } from '../components'
-import { paths } from '../lib/routes'
+import { BackTitle, Button, Screen } from '../components'
+import { useBack } from '../lib/nav'
 
 const steps: [string, string, string][] = [
   ['1', 'A situation drops', 'The host reveals a prompt everyone can relate to.'],
@@ -10,13 +9,10 @@ const steps: [string, string, string][] = [
 ]
 const visuals = ['▱', '▰▰', '♠', '🏆']
 
-export default function HowToPlay() {
-  const navigate = useNavigate()
-  const back = () => navigate(paths.home)
-
+/** The four steps. Used by the How to play screen and by the sheet in the pause menu. */
+export function HowSteps({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="screen scroll how">
-      <BackTitle title="How to play" onBack={back} />
+    <div className={compact ? 'how-steps compact' : 'how-steps'}>
       {steps.map(([n, title, text], i) => (
         <div className="how-step" key={n}>
           <b>{n}</b>
@@ -29,8 +25,24 @@ export default function HowToPlay() {
           </section>
         </div>
       ))}
-      <Button onClick={back}>Got it!</Button>
-      <HomeBar />
     </div>
+  )
+}
+
+export default function HowToPlay() {
+  const back = useBack()
+
+  return (
+    <Screen
+      className="how"
+      head={<BackTitle title="How to play" onBack={back} />}
+      foot={
+        <Button cta onClick={back}>
+          Got it!
+        </Button>
+      }
+    >
+      <HowSteps />
+    </Screen>
   )
 }

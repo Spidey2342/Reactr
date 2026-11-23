@@ -1,15 +1,14 @@
 .result {
   text-align: center;
-  padding-top: 45px;
 }
 
-.result>h1 {
+.result .screen-body>h1 {
   font-size: 29px;
   line-height: 1;
-  margin: 25px;
+  margin: 18px 0;
 }
 
-.result>.reaction {
+.result .screen-body>.reaction {
   margin: 16px auto;
 }
 
@@ -39,10 +38,6 @@
 .round-cards .reaction {
   width: 67px;
   height: 87px;
-}
-
-.result>.btn {
-  margin: 12px 0;
 }
 
 .score-list {
@@ -81,10 +76,9 @@
 
 .gameover {
   text-align: center;
-  padding-top: 48px;
 }
 
-.gameover>h4 {
+.gameover .screen-body>h4 {
   color: var(--muted);
   letter-spacing: 3px;
   margin: 0;
@@ -205,17 +199,18 @@
   margin: 20px 0;
 }
 
-.gameover>.btn {
+.gameover .screen-body>.btn {
   margin: 12px 0;
 }
 
-.gameover>.btn.secondary {
+.gameover .screen-body>.btn.secondary {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .back-home {
+  min-height: 44px;
   border: 0;
   background: none;
   color: var(--muted);

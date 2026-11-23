@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { BackTitle, BottomTabs, HomeBar, Toggle, type TabId } from '../components'
+import { BackTitle, BottomTabs, Screen, Toggle, type TabId } from '../components'
 import { packs } from '../data/dev-fixtures/packs' // DEV FIXTURE: counts come from the DB later
 import { paths } from '../lib/routes'
 
@@ -14,8 +14,11 @@ export default function Packs() {
   const goTab = (tab: TabId) => navigate(tab === 'home' ? paths.home : paths[tab])
 
   return (
-    <div className="screen scroll packs">
-      <BackTitle title="Packs" onBack={() => navigate(paths.home)} />
+    <Screen
+      className="packs"
+      head={<BackTitle title="Packs" onBack={() => navigate(paths.home)} />}
+      tabs={<BottomTabs active="packs" onChange={goTab} />}
+    >
       <p className="muted">Pick the chaos you want in your game.</p>
       <div className="active-counter">
         <b>{activeCount} packs active</b>
@@ -41,8 +44,6 @@ export default function Packs() {
           </div>
         </div>
       ))}
-      <BottomTabs active="packs" onChange={goTab} />
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

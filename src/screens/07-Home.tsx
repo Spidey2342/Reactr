@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router'
-import { BottomTabs, Button, HomeBar, Icon, IconButton, type TabId } from '../components'
+import { BottomTabs, Button, FaceAvatar, Icon, Screen, SoundButton, type TabId } from '../components'
 import { paths } from '../lib/routes'
-import { prefsApi, useGameState } from '../state/gameStore'
+import { useSession } from '../state/gameStore'
 
 const stats: [string, string][] = [
   ['12', 'GAMES'],
@@ -11,27 +11,23 @@ const stats: [string, string][] = [
 
 export default function Home() {
   const navigate = useNavigate()
-  const { prefs } = useGameState()
+  const session = useSession()
   const goTab = (tab: TabId) => navigate(tab === 'home' ? paths.home : paths[tab])
 
   return (
-    <div className="screen scroll home">
+    <Screen className="home" tabs={<BottomTabs active="home" onChange={goTab} />}>
       <div className="home-head">
         <div>
-          <h1>Hey, Kofi 👋</h1>
+          <h1>Hey, {session.name.split(' ')[0]} 👋</h1>
           <p>Ready to get roasted by life?</p>
         </div>
-        <IconButton
-          label={prefs.sound ? 'Mute sound' : 'Unmute sound'}
-          onClick={() => prefsApi.setSound(!prefs.sound)}
-        >
-          <Icon name="sound" />
-        </IconButton>
+        <SoundButton />
         <button type="button" className="profile-icon" aria-label="Profile" onClick={() => navigate(paths.profile)}>
-          😎<i />
+          <FaceAvatar session={session} />
+          <i />
         </button>
       </div>
-      <Button onClick={() => navigate(paths.create)}>
+      <Button cta onClick={() => navigate(paths.create)}>
         <span className="big-plus">＋</span>
         <b>Create Room</b>
         <small>HOST A ROOM, INVITE YOUR SQUAD</small>
@@ -73,8 +69,6 @@ export default function Home() {
           <b>9 TO 5 CHAOS</b>
         </div>
       </div>
-      <BottomTabs active="home" onChange={goTab} />
-      <HomeBar />
-    </div>
+    </Screen>
   )
 }

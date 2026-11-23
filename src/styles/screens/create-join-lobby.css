@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 26px 0 50px;
+  margin: 26px 0 8px;
 }
 
 .toggle-row b,.toggle-row small {
@@ -122,7 +122,7 @@
 
 .join-title {
   text-align: center;
-  margin: 35px 0 26px;
+  margin: 18px 0 20px;
 }
 
 .join-title h2 {
@@ -136,53 +136,103 @@
 }
 
 .join-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-align: center;
   color: var(--pink);
-  font-size: 10px;
+  font-size: 12px;
+}
+
+.join-status.invalid,.join-status.full {
+  color: var(--red);
 }
 
 .paste {
-  display: block;
-  margin: 18px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 8px auto;
+  padding: 0 14px;
   color: var(--yellow);
   border: 0;
   background: none;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
-.join>.btn.secondary {
+.join .screen-body>.btn.secondary {
   height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The Join button sits directly above the keyboard, in normal flow. Nothing overlaps. */
+.screen-foot.join-foot {
+  padding: 0;
+  gap: 0;
+  background: var(--bg);
+}
+
+.join-cta {
+  padding: 12px 24px;
 }
 
 .keyboard {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 71px;
-  padding: 12px 7px 19px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px 6px calc(var(--safe-bottom) + 26px);
   background: #242038;
 }
 
-.keyboard button {
-  width: 30px;
-  height: 40px;
-  border: 0;
-  border-radius: 5px;
-  background: #353048;
-  font-size: 11px;
-  font-weight: 600;
+.key-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
-.join>.btn:last-of-type {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 15px;
-  width: auto;
+.keyboard button {
+  flex: 1 1 0;
+  max-width: 38px;
+  height: 42px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: #353048;
+  font-size: 15px;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+}
+
+.keyboard .key-del {
+  flex: 1.5 1 0;
+  max-width: 58px;
+  background: #4b2a47;
+}
+
+.key-gap {
+  flex: 1.3 1 0;
+}
+
+.room-code b.caret {
+  position: relative;
+  box-shadow: 0 0 0 3px var(--pink);
+}
+
+.room-code b.caret:after {
+  content: "";
+  width: 2px;
+  height: 24px;
+  background: #0e0b1f;
+  animation: blink 1s steps(2) infinite;
 }
 
 .lobby .room-code {
@@ -209,7 +259,7 @@
   display: flex;
   justify-content: center;
   gap: 18px;
-  margin: 23px;
+  margin: 16px;
   color: var(--muted);
   font-size: 10px;
 }
@@ -222,6 +272,7 @@
 }
 
 .minimum {
+  margin: 0;
   text-align: center;
   color: var(--yellow);
   font-size: 10px;
@@ -250,10 +301,12 @@
 
 .leave {
   display: block;
-  margin: 20px auto;
+  min-height: 40px;
+  margin: 0 auto;
+  padding: 0 18px;
   border: 0;
   background: none;
   color: var(--red);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
